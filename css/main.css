@@ -1,0 +1,32 @@
+body {
+ min-width: 200px;
+}
+
+header {
+  text-align: center;
+  overflow: hidden;
+  padding-top: 5px;
+  text-align: center;
+}
+
+.topcontainer {
+	border-size: 2px;
+	border-style: solid;
+	border-color: red;
+}
+
+.playerarea {
+	border-size: 2px;
+	border-style: solid;
+	border-color: black;
+	text-align: center;
+	width: 75%;
+	float: left;
+}
+
+.stats {
+	text-align: right;
+	padding-right: 40px;
+	float: right;
+	width: 20%;
+}

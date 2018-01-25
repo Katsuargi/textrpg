@@ -1,21 +1,56 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Lee's practice site.</title>
+    <title>Old School RPG</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/main.css">
 </head>
 <body>
-	You have 15 points to distribute.
 
-    <form>
-    	Str: 1-10<br>
-    	<input type=number id="str" name="Str"><br>
-    	Dex: 1-10<br>
-    	<input type=number id="dex" name="Dex"><br>
-    	Sta: 1-10<br>
-    	<input type=number id="sta" name="Sta"><br>
-    </form>
-    <button id="test" onclick="storeTest()">Enter stat</button>
+	<header>
+		<h1 class="page name">Old School Text RPG</h1>
+	</header>
 
+	
+
+	<main class="mcontainer">
+		<section class="topcontainer">
+			<div id="textrpg" class="playarea">
+				<h2>You have 15 points to distribute.</h2>
+			    <form>
+			    	Name:<br>
+			    	<input type=text id="playerin" name="player"><br>
+			    	Str: 1-10<br>
+			    	<input type=number id="str" name="Str"><br>
+			    	Dex: 1-10<br>
+			    	<input type=number id="dex" name="Dex"><br>
+			    	Sta: 1-10<br>
+			    	<input type=number id="sta" name="Sta"><br>
+			    </form>
+			    <button id="test" onclick="storeTest()">Enter stat</button>
+			</div>
+
+			<div class="stats">
+				<h2><span id="playern">Name</span></h2><br>
+				<h2>Stats:</h2>
+				<h3>Health: <span id="healthdisplay"></span><br>
+
+				Strength: <span id="strdisplay"></span><br>
+				Dexterity: <span id="dexdisplay"></span><br>
+				Stamina: <span id="stadisplay"></span><br></h3>
+			</div>
+		</section>
+
+		<div id="castle1" class="playarea">
+			<h2>King's Castle</h2>
+			<p>You have finished character creation. Welcome to the starting area.
+				'Starting text here.'
+
+				The king has a quest for you.
+			</p>
+		</div>
+
+	</main>
 <script src="js/storestats.js"></script>
 </body>
 </html>
