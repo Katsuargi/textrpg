@@ -4,9 +4,10 @@ var test5;
 var totalStats;
 
 function storeTest() {
-    test3 = document.getElementById("str").value;
-    test4 = document.getElementById("dex").value;
-    test5 = document.getElementById("sta").value;
+    test3 = parseInt(document.getElementById("str").value);
+    test4 = parseInt(document.getElementById("dex").value);
+    test5 = parseInt(document.getElementById("sta").value);
+
     totalStats = test3 + test4 + test5;
     console.log(test3, test4, test5, totalStats);
     if (test3 > 10) {
