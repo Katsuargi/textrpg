@@ -3,6 +3,8 @@ var test4;
 var test5;
 var totalStats;
 var health;
+var money = 100;
+var inventory = [];
 
 function storeTest() {
     playern = (document.getElementById("playerin").value);
@@ -26,13 +28,18 @@ function storeTest() {
     }
     else {
         health = baseSta*10;
+        inventory.push("knife", " clothes");
         document.getElementById("playern").innerHTML=playern;
         document.getElementById("healthdisplay").innerHTML=health;
         document.getElementById("strdisplay").innerHTML=baseStr;
         document.getElementById("dexdisplay").innerHTML=baseDex;
         document.getElementById("stadisplay").innerHTML=baseSta;
+        document.getElementById("moneydisplay").innerHTML=money;
+        document.getElementById("inventory").innerHTML=inventory;
         document.getElementById("textrpg").innerHTML="";
         document.getElementById("stats").classList.remove('hide');
+        document.getElementById("castle1").classList.remove('hide');
+        document.getElementById("inventoryarea").classList.remove('hide');
     }
 
 }
