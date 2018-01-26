@@ -31,7 +31,8 @@ function storeTest() {
         document.getElementById("strdisplay").innerHTML=baseStr;
         document.getElementById("dexdisplay").innerHTML=baseDex;
         document.getElementById("stadisplay").innerHTML=baseSta;
-        document.getElementById("textrpg").innerHTML=document.getElementById("castle1");
+        document.getElementById("textrpg").innerHTML="";
+        document.getElementById("stats").classList.remove('hide');
     }
 
 }

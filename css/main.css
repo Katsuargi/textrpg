@@ -24,9 +24,13 @@ header {
 	float: left;
 }
 
-.stats {
+#stats {
 	text-align: right;
 	padding-right: 40px;
 	float: right;
 	width: 20%;
+}
+
+.hide {
+	visibility: hidden;
 }
