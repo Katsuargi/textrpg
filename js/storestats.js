@@ -5,9 +5,12 @@ var totalStats;
 var health;
 var money = 100;
 var inventory = [];
+var inventorysan = [];
+var bCart = [];
 var knife = false;
 var clothes = false;
 var sword = false;
+var cost = 0;
 
 function storeTest() {
     playern = (document.getElementById("playerin").value);
@@ -56,23 +59,37 @@ function shopTest() {
     document.getElementById("shop").classList.remove('hide');
 }
 
-function buySword() {
-    if (money >= 50) {
-        money = money - 50;
-        var sword = true;
-        inventory.push(" Sword");
-        var knife = false;
-        const index = inventory.indexOf("Knife");
-    
-        if (index !== -1) {
-            inventory.splice(index, 1);
+
+function addSword() {
+    cost = cost + 50;
+    bCart.push(" Sword");
+    document.getElementById("bcart").innerHTML=bCart;
+    document.getElementById("price").innerHTML=cost;
+    console.log(bCart.length);
+}
+
+function removeSword(){
+    const index = bCart.indexOf(" Sword");
+        if (bCart.length > 0) {
+            if (index !== -1) {
+                bCart.splice(index, 1);
+            }
+            cost = cost - 50;
         }
-        document.getElementById("swordB").classList.add('hide');
+    document.getElementById("bcart").innerHTML=bCart;
+    document.getElementById("price").innerHTML=cost;
+
+}
+
+function buy() {
+    if (money >= cost && bCart.length > 0) {
+        money = money - cost;
+        inventory.push(bCart);
         document.getElementById("inventory").innerHTML=inventory;
-    }
-    else {
+        document.getElementById("moneydisplay").innerHTML=money;
+    }  else {
         alert("Not enough money!")
-    }
+        }
 }
 
 function shopEnd() {
@@ -80,5 +97,3 @@ function shopEnd() {
     document.getElementById("playarea").classList.remove('hide');
     document.getElementById("shop").classList.add('hide');
 }
-
-
