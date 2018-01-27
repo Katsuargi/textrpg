@@ -13,9 +13,10 @@ header {
 	border-size: 2px;
 	border-style: solid;
 	border-color: red;
+	float: right;
 }
 
-.playerarea {
+.play {
 	border-size: 2px;
 	border-style: solid;
 	border-color: black;
@@ -27,17 +28,25 @@ header {
 #stats {
 	text-align: right;
 	padding-right: 40px;
-	float: right;
 	width: 20%;
 }
 
 #inventoryarea {
 	text-align: right;
 	padding-right: 40px;
-	float: right;
 	width: 20%;
+	max-width: 100px;
 }
 
 .hide {
 	visibility: hidden;
+}
+
+#shop {
+	border-size: 2px;
+	border-style: solid;
+	border-color: black;
+	text-align: center;
+	width: 75%;
+	float: left;
 }

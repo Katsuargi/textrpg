@@ -5,6 +5,9 @@ var totalStats;
 var health;
 var money = 100;
 var inventory = [];
+var knife = false;
+var clothes = false;
+var sword = false;
 
 function storeTest() {
     playern = (document.getElementById("playerin").value);
@@ -28,7 +31,9 @@ function storeTest() {
     }
     else {
         health = baseSta*10;
-        inventory.push("knife", " clothes");
+        inventory.push("Knife", " Clothes");
+        var knife = true;
+        var clothes = true;
         document.getElementById("playern").innerHTML=playern;
         document.getElementById("healthdisplay").innerHTML=health;
         document.getElementById("strdisplay").innerHTML=baseStr;
@@ -40,8 +45,40 @@ function storeTest() {
         document.getElementById("stats").classList.remove('hide');
         document.getElementById("castle1").classList.remove('hide');
         document.getElementById("inventoryarea").classList.remove('hide');
+        document.getElementById("shoptoggle").classList.remove('hide');
     }
 
+}
+
+function shopTest() {
+    document.getElementById("shoptoggle").classList.add('hide');
+    document.getElementById("playarea").classList.add('hide');
+    document.getElementById("shop").classList.remove('hide');
+}
+
+function buySword() {
+    if (money >= 50) {
+        money = money - 50;
+        var sword = true;
+        inventory.push(" Sword");
+        var knife = false;
+        const index = inventory.indexOf("Knife");
+    
+        if (index !== -1) {
+            inventory.splice(index, 1);
+        }
+        document.getElementById("swordB").classList.add('hide');
+        document.getElementById("inventory").innerHTML=inventory;
+    }
+    else {
+        alert("Not enough money!")
+    }
+}
+
+function shopEnd() {
+    document.getElementById("shoptoggle").classList.remove('hide');
+    document.getElementById("playarea").classList.remove('hide');
+    document.getElementById("shop").classList.add('hide');
 }
 
 

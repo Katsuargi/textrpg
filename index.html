@@ -14,22 +14,34 @@
 	
 
 	<main class="mcontainer">
-		<section class="topcontainer">
-			<div id="textrpg" class="playarea">
-				<h2>You have 15 points to distribute.</h2>
-			    <form>
-			    	Name:<br>
-			    	<input type=text id="playerin" name="player"><br>
-			    	Str: 1-10<br>
-			    	<input type=number id="str" name="Str"><br>
-			    	Dex: 1-10<br>
-			    	<input type=number id="dex" name="Dex"><br>
-			    	Sta: 1-10<br>
-			    	<input type=number id="sta" name="Sta"><br>
-			    </form>
-			    <button id="test" onclick="storeTest()">Enter stat</button>
-			</div>
+		
+		<section id="playarea">
+		<div id="textrpg" class="play">
+			<h2>You have 15 points to distribute.</h2>
+		    <form>
+		    	Name:<br>
+		    	<input type=text id="playerin" name="player"><br>
+		    	Str: 1-10<br>
+		    	<input type=number id="str" name="Str"><br>
+		    	Dex: 1-10<br>
+		    	<input type=number id="dex" name="Dex"><br>
+		    	Sta: 1-10<br>
+		    	<input type=number id="sta" name="Sta"><br>
+		    </form>
+		    <button id="test" onclick="storeTest()">Enter stats</button>
+		</div>
 
+		<div id="castle1" class="play hide">
+			<h2>King's Castle</h2>
+			<p>You have finished character creation. Welcome to the starting area.
+				'Starting text here.'
+
+				The king has a quest for you.
+			</p>
+		</div>
+	</section>
+		
+		<section class="topcontainer">
 			<div id="stats" class="hide">
 				<h2><span id="playern">Name</span></h2><br>
 				<h2>Stats:</h2>
@@ -41,20 +53,28 @@
 				-</br>
 				Money: <span id="moneydisplay"></span></br></h3>
 			</div>
+			
+			<div id="inventoryarea" class="hide">
+				<h2>Inventory:</h2>
+				<h3><span id="inventory"></span></h3>
+			</div>
+
+
 		</section>
 
-		<div id="castle1" class="playarea hide">
-			<h2>King's Castle</h2>
-			<p>You have finished character creation. Welcome to the starting area.
-				'Starting text here.'
-
-				The king has a quest for you.
-			</p>
+		<div id="shoptoggle" class="hide">
+			<button id="shopbut" onclick="shopTest()">Shop</button>
 		</div>
 
-		<div id="inventoryarea" class="hide">
-			<h3><li><span id="inventory"></span></li></h3>
+		<div id="shop" class="hide">
+			<h1>Store</h1><br>
+			Inventory goes here.<br>
+			Sword: +3 damage. <button id="swordB" onclick="buySword()">50 gold</button><br>
+			<button id="shopend" onclick="shopEnd()">Exit</button>
 		</div>
+
+
+
 
 	</main>
 <script src="js/storestats.js"></script>
