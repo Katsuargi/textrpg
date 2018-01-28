@@ -1,19 +1,10 @@
-var test3;
-var test4;
-var test5;
-var totalStats;
-var health;
-var money = 100;
 var inventory = [];
-var inventorysan = [];
 var bCart = [];
 var knife = false;
 var clothes = false;
 var sword = false;
 var leatherA = false;
 var cost = 0;
-var workingCost;
-var workingName;
 var swordI = {
     name: " Sword",
     price: 50
@@ -25,38 +16,45 @@ var leatherI = {
 var locations = {
 
 }
+var player = {
+    name: "X",
+    baseStr: 0,
+    baseDex: 0,
+    baseSta: 0,
+    health: 0,
+    money: 100,    
+}
 
 function storeTest() {
-    playern = (document.getElementById("playerin").value);
-    baseStr = parseInt(document.getElementById("str").value);
-    baseDex = parseInt(document.getElementById("dex").value);
-    baseSta = parseInt(document.getElementById("sta").value);
+    player.name = (document.getElementById("playerin").value);
+    player.baseStr = parseInt(document.getElementById("str").value);
+    player.baseDex = parseInt(document.getElementById("dex").value);
+    player.baseSta = parseInt(document.getElementById("sta").value);
+    var totalStats = player.baseStr + player.baseDex + player.baseSta;
     
-    totalStats = baseStr + baseDex + baseSta;
-    console.log(playern, baseStr, baseDex, baseSta, totalStats);
-    if (baseStr > 10) {
+    if (player.baseStr > 10) {
     	alert("Your strength is above 10. Please enter a value between 1-10");
     }
-    else if (baseDex > 10) {
+    else if (player.baseDex > 10) {
     	alert("Your dexterity is above 10. Please enter a value between 1-10");
     }
-    else if (baseSta > 10) {
+    else if (player.baseSta > 10) {
     	alert("Your stamina is above 10. Please enter a value between 1-10");
     }
     else if (totalStats > 15) {
     	alert("Your total stats are above 15. Please lower your stats.")
     }
     else {
-        health = baseSta*10;
+        player.health = player.baseSta*10;
         inventory.push("Knife", " Clothes");
         var knife = true;
         var clothes = true;
-        document.getElementById("playern").innerHTML=playern;
-        document.getElementById("healthdisplay").innerHTML=health;
-        document.getElementById("strdisplay").innerHTML=baseStr;
-        document.getElementById("dexdisplay").innerHTML=baseDex;
-        document.getElementById("stadisplay").innerHTML=baseSta;
-        document.getElementById("moneydisplay").innerHTML=money;
+        document.getElementById("playern").innerHTML=player.name;
+        document.getElementById("healthdisplay").innerHTML=player.health;
+        document.getElementById("strdisplay").innerHTML=player.baseStr;
+        document.getElementById("dexdisplay").innerHTML=player.baseDex;
+        document.getElementById("stadisplay").innerHTML=player.baseSta;
+        document.getElementById("moneydisplay").innerHTML=player.money;
         document.getElementById("inventory").innerHTML=inventory;
         document.getElementById("stats").classList.remove('hide');
         document.getElementById("inventoryarea").classList.remove('hide');
@@ -141,8 +139,8 @@ function forestOne(){
 }
 
 function areaTransition(){
-    const main = document.getElementById("playarea");
-    const div = document.getElementById("castle1");
+    const main = document.getElementById(areaFrom);
+    const div = document.getElementById(areaTo);
     const clone = div.cloneNode(true);
 
     while (main.firstChild) main.firstChild.remove();
@@ -152,7 +150,13 @@ function areaTransition(){
 }
 
 function throneRoom() {
-    areaFrom = playarea;
-    areaTo = castle1;
+    areaFrom = "playarea";
+    areaTo = "castle1";
+    areaTransition();
+}
+
+function forestEntrance() {
+    areaFrom = "playarea";
+    areaTo = "forestEntrance";
     areaTransition();
 }
