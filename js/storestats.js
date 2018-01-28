@@ -6,13 +6,25 @@ var health;
 var money = 100;
 var inventory = [];
 var inventorysan = [];
-var prices = {sword: 50, leatherA: 100}
 var bCart = [];
 var knife = false;
 var clothes = false;
 var sword = false;
 var leatherA = false;
 var cost = 0;
+var workingCost;
+var workingName;
+var swordI = {
+    name: " Sword",
+    price: 50
+}
+var leatherI = {
+    name: " Leather Armor",
+    price: 100
+}
+var locations = {
+
+}
 
 function storeTest() {
     playern = (document.getElementById("playerin").value);
@@ -46,11 +58,11 @@ function storeTest() {
         document.getElementById("stadisplay").innerHTML=baseSta;
         document.getElementById("moneydisplay").innerHTML=money;
         document.getElementById("inventory").innerHTML=inventory;
-        document.getElementById("textrpg").innerHTML="";
         document.getElementById("stats").classList.remove('hide');
-        document.getElementById("castle1").classList.remove('hide');
         document.getElementById("inventoryarea").classList.remove('hide');
         document.getElementById("shoptoggle").classList.remove('hide');
+        throneRoom();
+        ;
     }
 
 }
@@ -61,37 +73,45 @@ function shopTest() {
     document.getElementById("shop").classList.remove('hide');
 }
 
+function addItem() {
+    cost = cost + workingCost;
+    bCart.push(workingName);
+    shopDisplayUp();
+}
+
+function removeItem() {
+    const index = bCart.indexOf(workingName);
+    
+    if (index !== -1) {
+        bCart.splice(index, 1);
+        cost = cost - workingCost;
+        shopDisplayUp();
+    }
+}
+
 
 function addSword() {
-    cost = cost + prices.sword;
-    bCart.push(" Sword");
-    shopDisplayUp();
+    workingName = swordI.name;
+    workingCost = swordI.price;
+    addItem();
 }
 
 function removeSword(){
-    const index = bCart.indexOf(" Sword");
-        
-        if (index !== -1) {
-            bCart.splice(index, 1);
-            cost = cost - prices.sword;
-        }
-    shopDisplayUp();
+    workingName = swordI.name;
+    workingCost = swordI.price;
+    removeItem();
 }
 
 function addLeatherA() {
-    cost = cost + prices.leatherA;
-    bCart.push(" Leather Armor");
-    shopDisplayUp();
+    workingName = leatherI.name;
+    workingCost = leatherI.price;
+    addItem();
 }
 
 function removeLeatherA(){
-    const index = bCart.indexOf(" Leather Armor");
-        
-        if (index !== -1) {
-            bCart.splice(index, 1);
-            cost = cost - prices.leatherA;
-        }
-    shopDisplayUp();
+    workingName = leatherI.name;
+    workingCost = leatherI.price;
+    removeItem();
 }
 
 function buy() {
@@ -114,4 +134,25 @@ function shopEnd() {
 function shopDisplayUp(){
     document.getElementById("bcart").innerHTML=bCart;
     document.getElementById("price").innerHTML=cost;  
+}
+
+function forestOne(){
+    document.getElementById()
+}
+
+function areaTransition(){
+    const main = document.getElementById("playarea");
+    const div = document.getElementById("castle1");
+    const clone = div.cloneNode(true);
+
+    while (main.firstChild) main.firstChild.remove();
+
+    main.appendChild(clone);
+    ;
+}
+
+function throneRoom() {
+    areaFrom = playarea;
+    areaTo = castle1;
+    areaTransition();
 }
