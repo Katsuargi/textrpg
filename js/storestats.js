@@ -6,10 +6,12 @@ var health;
 var money = 100;
 var inventory = [];
 var inventorysan = [];
+var prices = {sword: 50, leatherA: 100}
 var bCart = [];
 var knife = false;
 var clothes = false;
 var sword = false;
+var leatherA = false;
 var cost = 0;
 
 function storeTest() {
@@ -61,24 +63,35 @@ function shopTest() {
 
 
 function addSword() {
-    cost = cost + 50;
+    cost = cost + prices.sword;
     bCart.push(" Sword");
-    document.getElementById("bcart").innerHTML=bCart;
-    document.getElementById("price").innerHTML=cost;
-    console.log(bCart.length);
+    shopDisplayUp();
 }
 
 function removeSword(){
     const index = bCart.indexOf(" Sword");
-        if (bCart.length > 0) {
-            if (index !== -1) {
-                bCart.splice(index, 1);
-            }
-            cost = cost - 50;
+        
+        if (index !== -1) {
+            bCart.splice(index, 1);
+            cost = cost - prices.sword;
         }
-    document.getElementById("bcart").innerHTML=bCart;
-    document.getElementById("price").innerHTML=cost;
+    shopDisplayUp();
+}
 
+function addLeatherA() {
+    cost = cost + prices.leatherA;
+    bCart.push(" Leather Armor");
+    shopDisplayUp();
+}
+
+function removeLeatherA(){
+    const index = bCart.indexOf(" Leather Armor");
+        
+        if (index !== -1) {
+            bCart.splice(index, 1);
+            cost = cost - prices.leatherA;
+        }
+    shopDisplayUp();
 }
 
 function buy() {
@@ -96,4 +109,9 @@ function shopEnd() {
     document.getElementById("shoptoggle").classList.remove('hide');
     document.getElementById("playarea").classList.remove('hide');
     document.getElementById("shop").classList.add('hide');
+}
+
+function shopDisplayUp(){
+    document.getElementById("bcart").innerHTML=bCart;
+    document.getElementById("price").innerHTML=cost;  
 }
