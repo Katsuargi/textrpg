@@ -1,9 +1,5 @@
 var inventory = [];
 var bCart = [];
-var knife = false;
-var clothes = false;
-var sword = false;
-var leatherA = false;
 var cost = 0;
 var swordI = {
     name: " Sword",
@@ -44,11 +40,12 @@ function storeTest() {
     else if (totalStats > 15) {
     	alert("Your total stats are above 15. Please lower your stats.")
     }
+    else if (player.baseStr < 1 || player.baseDex < 1 || player.baseSta  < 1 || totalStats < 15) {
+        alert("Please spend all 15 points and make sure all values are between 1-10.")
+    }
     else {
         player.health = player.baseSta*10;
         inventory.push("Knife", " Clothes");
-        var knife = true;
-        var clothes = true;
         document.getElementById("playern").innerHTML=player.name;
         document.getElementById("healthdisplay").innerHTML=player.health;
         document.getElementById("strdisplay").innerHTML=player.baseStr;
@@ -58,7 +55,6 @@ function storeTest() {
         document.getElementById("inventory").innerHTML=inventory;
         document.getElementById("stats").classList.remove('hide');
         document.getElementById("inventoryarea").classList.remove('hide');
-        document.getElementById("shoptoggle").classList.remove('hide');
         throneRoom();
         ;
     }
@@ -66,7 +62,6 @@ function storeTest() {
 }
 
 function shopTest() {
-    document.getElementById("shoptoggle").classList.add('hide');
     document.getElementById("playarea").classList.add('hide');
     document.getElementById("shop").classList.remove('hide');
 }
@@ -113,18 +108,20 @@ function removeLeatherA(){
 }
 
 function buy() {
-    if (money >= cost && bCart.length > 0) {
-        money = money - cost;
+    if (player.money >= cost && bCart.length > 0) {
+        player.money = player.money - cost;
         inventory.push(bCart);
         document.getElementById("inventory").innerHTML=inventory;
-        document.getElementById("moneydisplay").innerHTML=money;
+        document.getElementById("moneydisplay").innerHTML=player.money;
+        bCart.length = 0;
+        cost = 0;
+        shopDisplayUp();
     }  else {
         alert("Not enough money!")
         }
 }
 
 function shopEnd() {
-    document.getElementById("shoptoggle").classList.remove('hide');
     document.getElementById("playarea").classList.remove('hide');
     document.getElementById("shop").classList.add('hide');
 }
