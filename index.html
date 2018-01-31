@@ -18,16 +18,19 @@
 		
 		<section id="playarea">
 
-			<div id="mainArea" class="play">
+			<div id="mainArea" class="play info">
 				<h2>You have 15 points to distribute.</h2>
 			    <form>
 			    	Name:<br>
 			    	<input type=text id="playerin" name="player"><br>
-			    	Str: 1-10<br>
+			    	Strength: 1-10<br>
 			    	<input type=number id="str" name="Str"><br>
-			    	Dex: 1-10<br>
+			    	<p class="infotext">Strength increases damage.</br> 
+			    	Dexterity increases hid and dodge.</br>
+			    	Stamina increases HP.</p>
+			    	Dexterity: 1-10<br>
 			    	<input type=number id="dex" name="Dex"><br>
-			    	Sta: 1-10<br>
+			    	Stamina: 1-10<br>
 			    	<input type=number id="sta" name="Sta"><br>
 			    </form>
 			    <button id="test" onclick="storeTest()">Enter stats</button>
@@ -93,6 +96,7 @@
 				</div>
 			</div>
 		</section>
+
 
 	</main>
 <script src="js/storestats.js"></script>
