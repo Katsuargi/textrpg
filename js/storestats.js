@@ -18,7 +18,16 @@ var player = {
     baseDex: 0,
     baseSta: 0,
     health: 0,
-    money: 100,    
+    money: 100,
+    weaponDam: 0,
+    exp: 0,  
+}
+
+var goblin = {
+    baseStr: 3,
+    baseDex: 3,
+    baseSta: 3,
+    health: 20,
 }
 
 function storeTest() {
@@ -46,6 +55,7 @@ function storeTest() {
     else {
         player.health = player.baseSta*10;
         inventory.push("Knife", " Clothes");
+        player.weaponDam = 1;
         document.getElementById("playern").innerHTML=player.name;
         document.getElementById("healthdisplay").innerHTML=player.health;
         document.getElementById("strdisplay").innerHTML=player.baseStr;
@@ -155,5 +165,55 @@ function throneRoom() {
 function forestEntrance() {
     areaFrom = "playarea";
     areaTo = "forestEntrance";
+    areaTransition();
+}
+
+function gob() {
+    areaFrom = "playarea";
+    areaTo = "goblinFight";
+    areaTransition();
+}
+
+function rEncounterForest() {
+    goblin.health = 20;
+    var r = Math.random();
+    console.log(r);
+    if (r <= .5){ 
+        gob();
+    } 
+    else forestEntrance();
+}
+
+function fight(){
+    while(player.health > 0 && goblin.health > 0) {
+        var playerAtt = (Math.random() * 20) + player.baseDex;
+        var playerDef = player.baseDex + 10;
+        var goblinAtt = (Math.random() * 20) + goblin.baseDex;
+        var goblinDef = goblin.baseDex + 10;
+        if(playerAtt > goblinDef) {
+            goblin.health = goblin.health - (player.baseStr + player.weaponDam);
+        }
+        if(goblinAtt > playerDef) {
+        player.health = player.health - (goblin.baseStr);
+        }
+        document.getElementById("healthdisplay").innerHTML=player.health;
+        setTimeout(fight(), 3000)
+    }
+    if(player.health <=0) {
+        playerDeath()
+    }
+    else if(goblin.health <=0){
+         areaFrom = "playarea";
+         areaTo = "victory";
+         player.exp = player.exp + 10;
+         player.money = player.money +10;
+         document.getElementById("moneydisplay").innerHTML=player.money;
+         areaTransition();
+    }
+}
+
+function playerDeath(){
+    areaFrom = "playarea";
+    areaTo = "dead";
     areaTransition();
 }
