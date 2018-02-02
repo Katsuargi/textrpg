@@ -42,9 +42,20 @@ var wolf = {
     exp: 2,
 }
 
+var dragon = {
+    baseStr: 10,
+    baseDex: 6,
+    baseSta: 8,
+    health: 80,
+    money: 50,
+    exp: 10,
+}
+
 var quests = {
     princess: 0,
 }
+
+//Character generation and display function.
 
 function storeTest() {
     player.name = (document.getElementById("playerin").value);
@@ -88,6 +99,8 @@ function storeTest() {
     }
 
 }
+
+//shop functions.
 
 function shopTest() {
     document.getElementById("playarea").classList.add('hide');
@@ -165,9 +178,7 @@ function shopDisplayUp(){
     document.getElementById("price").innerHTML=cost;  
 }
 
-function forestOne(){
-    document.getElementById()
-}
+//Area transition functions.
 
 function areaTransition(){
     const main = document.getElementById(areaFrom);
@@ -184,6 +195,8 @@ function areaTransition(){
     ;
 }
 
+//Transition from areas that shouldn't generate a return point.
+
 function areaTransitionV(){
     const main = document.getElementById(areaFrom);
     const div = document.getElementById(areaTo);
@@ -195,14 +208,27 @@ function areaTransitionV(){
 }
 
 function throneRoom() {
-    console.log(quests.princess)
+    console.log(player)
     if (quests.princess == 1) {
     areaFrom = "playarea";
     areaTo = "castle1";
     }
-    else if (quests.princess == 2) {
+    else if (quests.princess == 2 || quests.princess == 3) {
     areaFrom = "playarea";
     areaTo = "castle2";
+    }
+    else if (quests.princess == 4) {
+    areaFrom = "playarea";
+    areaTo = "castle2";
+    document.getElementById("kingQuestText").innerHTML = "The king is super happy you saved the princess.";
+    quests.princess = 5;
+    player.money = player.money + 200;
+    player.exp = player.exp + 20;
+    }
+    else if (quests.princess == 5){
+    areaFrom = "playarea";
+    areaTo = "castle2";
+    document.getElementById("kingQuestText").innerHTML = "The king and princess are happy.";
     }
     console.log(quests.princess)
     areaTransition();
@@ -220,10 +246,27 @@ function forest2() {
     rEncounterForest();
 }
 
+function dragonCave() {
+    areaFrom = "playarea";
+    areaTo = "dragonCave";
+    if(quests.princess >= 3){
+        areaTransition();
+    } else {
+      dragonF();
+    }
+}
+
+function goBack(){
+    areaFrom = "playarea";
+    areaTo = "backup";
+    areaTransition();
+}
+
+//Battle functions.
+
 function gob() {
     areaFrom = "playarea";
     areaTo = "goblinFight";
-    //areaR = document.getElementById(areaFrom);
     goblin.health = 20;
     enemyName = goblin;
     areaTransitionV();
@@ -232,9 +275,16 @@ function gob() {
 function wolfF() {
     areaFrom = "playarea";
     areaTo = "wolfFight";
-//  areaR = "playarea";
     wolf.health = 40;
     enemyName = wolf;
+    areaTransitionV();
+}
+
+function dragonF() {
+    areaFrom = "playarea";
+    areaTo = "dragonFight";
+    enemyName = dragon;
+    quests.princess = 3;
     areaTransitionV();
 }
 
@@ -287,6 +337,8 @@ function playerDeath(){
     areaTransition();
 }
 
+//Quest functions.
+
 function princessQuest(){
     areaFrom = "playarea";
     areaTo = "princessQuest";
@@ -294,11 +346,72 @@ function princessQuest(){
     areaTransitionV();
 }
 
-
-function goBack(){
-    areaFrom = "playarea";
-    areaTo = "backup";
-    //areaTo = areaR;
-    areaTransition();
+function savePrincess(){
+    document.getElementById("princessSave").classList.add('hide');
+    document.getElementById("princessText").innerHTML = "You've saved the princess.";
+    quests.princess = 4;
 }
+
+
+//Level functions.
+
+function addStr(){
+    if(player.exp >= player.baseStr) {
+        player.exp = player.exp - player.baseStr;
+        player.baseStr = player.baseStr + 1;
+        document.getElementById("strdisplay").innerHTML=player.baseStr;
+        document.getElementById("expdisplay").innerHTML=player.exp;
+
+    }
+}
+
+function addDex(){
+    if(player.exp >= player.baseDex) {
+        player.exp = player.exp - player.baseDex;
+        player.baseDex = player.baseDex + 1;
+        document.getElementById("dexdisplay").innerHTML=player.baseDex;
+        document.getElementById("expdisplay").innerHTML=player.exp;
+
+    }
+}
+
+function addSta(){
+    if(player.exp >= player.baseSta) {
+        player.exp = player.exp - player.baseSta;
+        player.baseSta = player.baseSta + 1;
+        player.health = player.baseSta*10;
+        document.getElementById("stadisplay").innerHTML=player.baseSta;
+        document.getElementById("healthdisplay").innerHTML=player.health;
+        document.getElementById("expdisplay").innerHTML=player.exp;
+
+    }
+}
+
+//Save / Load.
+
+function saveData(){
+    localStorage.setItem('inventorys', JSON.stringify(inventory));
+    localStorage.setItem('players', JSON.stringify(player));
+    localStorage.setItem('questss', JSON.stringify(quests));
+}
+
+function loadData() {
+        player = JSON.parse(localStorage.getItem('players'));
+        inventory = JSON.parse(localStorage.getItem('inventorys'));
+        quests = JSON.parse(localStorage.getItem('questss'));
+        console.log(player);
+        document.getElementById("playern").innerHTML=player.name;
+        document.getElementById("healthdisplay").innerHTML=player.health;
+        document.getElementById("strdisplay").innerHTML=player.baseStr;
+        document.getElementById("dexdisplay").innerHTML=player.baseDex;
+        document.getElementById("stadisplay").innerHTML=player.baseSta;
+        document.getElementById("moneydisplay").innerHTML=player.money;
+        document.getElementById("expdisplay").innerHTML=player.exp;
+        document.getElementById("inventory").innerHTML=inventory;
+        document.getElementById("stats").classList.remove('hide');
+        document.getElementById("inventoryarea").classList.remove('hide');
+        throneRoom();
+        ;
+    }
+
 
