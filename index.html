@@ -48,7 +48,8 @@
 				Dexterity: <span id="dexdisplay"></span><br>
 				Stamina: <span id="stadisplay"></span><br>
 				-</br>
-				Money: <span id="moneydisplay"></span></br></h3>
+				Money: <span id="moneydisplay"></span></br>
+				EXP: <span id="expdisplay"></span></br></h3>
 			</div>
 			
 			<div id="inventoryarea" class="hide">
@@ -105,6 +106,15 @@
 				</div>
 			</div>
 
+			<div id="wolfFight" class="play">
+				<h2>Wolf Fight</h2>
+				<p>A wolf tries to bite your leg.</p>
+				<div id="navigationButtons">
+					<button id="fight" onclick="fight()">Fight</button>
+					<button id="throneRoom" onclick="throneRoom()">Run</button>
+				</div>
+			</div>
+
 			<div id="dead" class="play">
 				<h2>You are dead.</h2>
 				<p>Play again later!</p>
@@ -116,7 +126,7 @@
 				<h2>You won the fight.</h2>
 				<p>Good job!</p>
 				<div id="navigationButtons">
-					<button id="throneRoom" onclick="throneRoom()">South</button>
+					<button id="throneRoom" onclick="goBack()">South</button>
 				</div>
 			</div>
 		</section>

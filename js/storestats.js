@@ -20,6 +20,7 @@ var player = {
     health: 0,
     money: 100,
     weaponDam: 0,
+    defense: 0,
     exp: 0,  
 }
 
@@ -27,7 +28,18 @@ var goblin = {
     baseStr: 3,
     baseDex: 3,
     baseSta: 3,
-    health: 20,
+    health: 30,
+    money: 10,
+    exp: 1,
+}
+
+var wolf = {
+    baseStr: 4,
+    baseDex: 4,
+    baseSta: 4,
+    health: 40,
+    money: 15,
+    exp: 2,
 }
 
 function storeTest() {
@@ -62,6 +74,7 @@ function storeTest() {
         document.getElementById("dexdisplay").innerHTML=player.baseDex;
         document.getElementById("stadisplay").innerHTML=player.baseSta;
         document.getElementById("moneydisplay").innerHTML=player.money;
+        document.getElementById("expdisplay").innerHTML=player.exp;
         document.getElementById("inventory").innerHTML=inventory;
         document.getElementById("stats").classList.remove('hide');
         document.getElementById("inventoryarea").classList.remove('hide');
@@ -96,35 +109,41 @@ function removeItem() {
 function addSword() {
     workingName = swordI.name;
     workingCost = swordI.price;
+    var swordY = true;
     addItem();
 }
 
 function removeSword(){
     workingName = swordI.name;
     workingCost = swordI.price;
+    var swordY = false;
     removeItem();
 }
 
 function addLeatherA() {
     workingName = leatherI.name;
     workingCost = leatherI.price;
+    var leatherY = true;
     addItem();
 }
 
 function removeLeatherA(){
     workingName = leatherI.name;
     workingCost = leatherI.price;
+    var leatherY = false;
     removeItem();
 }
 
 function buy() {
     if (player.money >= cost && bCart.length > 0) {
         player.money = player.money - cost;
-        inventory.push(bCart);
+        inventory = inventory.concat(bCart);
         document.getElementById("inventory").innerHTML=inventory;
         document.getElementById("moneydisplay").innerHTML=player.money;
         bCart.length = 0;
         cost = 0;
+        if(swordY = true) {player.weaponDam = 3}
+        if(leatherY = true) {player.defense = 3}
         shopDisplayUp();
     }  else {
         alert("Not enough money!")
@@ -171,43 +190,58 @@ function forestEntrance() {
 function gob() {
     areaFrom = "playarea";
     areaTo = "goblinFight";
+    areaR = document.getElementById(areaFrom);
+    goblin.health = 20;
+    enemyName = goblin;
+    areaTransition();
+}
+
+function wolfF() {
+    areaFrom = "playarea";
+    areaTo = "wolfFight";
+    areaR = "playarea";
+    wolf.health = 40;
+    enemyName = wolf;
     areaTransition();
 }
 
 function rEncounterForest() {
-    goblin.health = 20;
     var r = Math.random();
     console.log(r);
-    if (r <= .5){ 
+    if (r <= .25){ 
         gob();
     } 
+    else if (r >= .26 && r <= .5) {
+        wolfF();
+    }
     else forestEntrance();
 }
 
 function fight(){
-    while(player.health > 0 && goblin.health > 0) {
+    console.log(enemyName);
+    while(player.health > 0 && enemyName.health > 0) {
         var playerAtt = (Math.random() * 20) + player.baseDex;
-        var playerDef = player.baseDex + 10;
-        var goblinAtt = (Math.random() * 20) + goblin.baseDex;
-        var goblinDef = goblin.baseDex + 10;
-        if(playerAtt > goblinDef) {
-            goblin.health = goblin.health - (player.baseStr + player.weaponDam);
+        var playerDef = player.baseDex + player.defense + 10;
+        var enemyAtt = (Math.random() * 20) + enemyName.baseDex;
+        var enemyDef = enemyName.baseDex + 10;
+        if(playerAtt > enemyDef) {
+            enemyName.health = enemyName.health - (player.baseStr + player.weaponDam);
         }
-        if(goblinAtt > playerDef) {
-        player.health = player.health - (goblin.baseStr);
+        if(enemyAtt > playerDef) {
+        player.health = player.health - (enemyName.baseStr);
         }
         document.getElementById("healthdisplay").innerHTML=player.health;
-        setTimeout(fight(), 3000)
     }
     if(player.health <=0) {
         playerDeath()
     }
-    else if(goblin.health <=0){
+    else if(enemyName.health <=0){
          areaFrom = "playarea";
          areaTo = "victory";
-         player.exp = player.exp + 10;
-         player.money = player.money +10;
+         player.exp = player.exp + enemyName.exp;
+         player.money = player.money + enemyName.money;
          document.getElementById("moneydisplay").innerHTML=player.money;
+         document.getElementById("expdisplay").innerHTML=player.exp;
          areaTransition();
     }
 }
@@ -217,3 +251,12 @@ function playerDeath(){
     areaTo = "dead";
     areaTransition();
 }
+
+function goBack(){
+    console.log(areaR);
+    areaFrom = "playarea";
+    areaTo = "forestEntrance";
+    //areaTo = areaR;
+    areaTransition();
+}
+

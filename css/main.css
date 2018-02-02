@@ -16,8 +16,9 @@ img {
 .topcontainer {
 	border-size: 2px;
 	border-style: solid;
-	border-color: red;
+	border-color: black;
 	float: right;
+	max-width: 20%;
 }
 
 .play {
@@ -27,19 +28,6 @@ img {
 	text-align: center;
 	width: 75%;
 	float: left;
-}
-
-#stats {
-	text-align: right;
-	padding-right: 40px;
-	width: 20%;
-}
-
-#inventoryarea {
-	text-align: right;
-	padding-right: 40px;
-	width: 20%;
-	max-width: 100px;
 }
 
 .hide {
@@ -90,4 +78,32 @@ input {
 	visibility: visible;
 	top: -5px;
 	left: 105%;
+}
+
+@media only screen and (min-width: 815px) {
+	body {
+		margin: 0 auto;
+		max-width: 768px;
+	}
+}
+
+@media only screen and (max-width: 815px) {
+	body {
+		margin: 0 auto;
+		max-width: 768px;
+	}
+
+.topcontainer {
+	float: left;
+	min-width: 125px;
+}
+
+}
+
+@media only screen and (max-width: 500px) {
+	button {
+	border-size: 5px;
+	margin: 10px;
+	padding: 10px;
+}
 }
