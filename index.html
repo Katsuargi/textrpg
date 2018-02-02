@@ -84,8 +84,9 @@
 					The king has a quest for you.
 				</p>
 				<div id="navigationButtons">
-					<button id="forest1" onclick="rEncounterForest()">North</button>
+					<button id="forest1" onclick="forestEntrance()">North</button>
 					<button id="shopbut" onclick="shopTest()">Shop</button>
+					<button onclick="princessQuest()">Accept quest.</button>
 				</div>
 			</div>
 
@@ -94,6 +95,15 @@
 				<p>You have moved to the entrance of the forest.</p>
 				<div id="navigationButtons">
 					<button id="throneRoom" onclick="throneRoom()">South</button>
+					<button onclick="forest2()">North</button>
+				</div>
+			</div>
+
+			<div id="forest2" class="play">
+				<h2>In the forest.</h2>
+				<p>You have wandered deeper into the forest.</p>
+				<div id="navigationButtons">
+					<button id="forest1" onclick="forestEntrance()">South</button>
 				</div>
 			</div>
 
@@ -102,7 +112,7 @@
 				<p>A goblin wants to pick a fight.</p>
 				<div id="navigationButtons">
 					<button id="fight" onclick="fight()">Fight</button>
-					<button id="throneRoom" onclick="throneRoom()">Run</button>
+					<button id="throneRoom" onclick="goBack()">Run</button>
 				</div>
 			</div>
 
@@ -111,7 +121,7 @@
 				<p>A wolf tries to bite your leg.</p>
 				<div id="navigationButtons">
 					<button id="fight" onclick="fight()">Fight</button>
-					<button id="throneRoom" onclick="throneRoom()">Run</button>
+					<button id="throneRoom" onclick="goBack()">Run</button>
 				</div>
 			</div>
 
@@ -126,7 +136,27 @@
 				<h2>You won the fight.</h2>
 				<p>Good job!</p>
 				<div id="navigationButtons">
-					<button id="throneRoom" onclick="goBack()">Go Back.</button>
+					<button id="goBack" onclick="goBack()">Go Back.</button>
+				</div>
+			</div>
+
+			<div id="backup"></div>
+
+			<div id="princessQuest" class="play">
+				<h2>The king wants you to save the princess from the dragon.</h2>
+				<p>Good luck!</p>
+				<div id="navigationButtons">
+					<button id="goBack" onclick="throneRoom()">Go Back.</button>
+				</div>
+			</div>
+
+			<div id="castle2" class="play">
+				<h2>King's Castle</h2>
+				<p>You have accepted the king's quest. He waits wait baited breath for you to hurry up and get on with it.
+				</p>
+				<div id="navigationButtons">
+					<button id="forest1" onclick="forestEntrance()">North</button>
+					<button id="shopbut" onclick="shopTest()">Shop</button>
 				</div>
 			</div>
 		</section>

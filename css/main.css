@@ -26,8 +26,15 @@ img {
 	border-style: solid;
 	border-color: black;
 	text-align: center;
-	width: 75%;
+	width: 100%;
+	max-width: 600px;
 	float: left;
+}
+
+#backup {
+	width: 100%;
+	max-width: 600px;
+	border-size: 0px;
 }
 
 .hide {
@@ -91,6 +98,10 @@ input {
 	body {
 		margin: 0 auto;
 		max-width: 768px;
+	}
+
+	.play {
+		width: 75%;
 	}
 
 .topcontainer {

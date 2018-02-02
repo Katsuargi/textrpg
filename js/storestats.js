@@ -42,6 +42,10 @@ var wolf = {
     exp: 2,
 }
 
+var quests = {
+    princess: 0,
+}
+
 function storeTest() {
     player.name = (document.getElementById("playerin").value);
     player.baseStr = parseInt(document.getElementById("str").value);
@@ -78,6 +82,7 @@ function storeTest() {
         document.getElementById("inventory").innerHTML=inventory;
         document.getElementById("stats").classList.remove('hide');
         document.getElementById("inventoryarea").classList.remove('hide');
+        quests.princess = 1;
         throneRoom();
         ;
     }
@@ -167,42 +172,70 @@ function forestOne(){
 function areaTransition(){
     const main = document.getElementById(areaFrom);
     const div = document.getElementById(areaTo);
+    const backup = document.getElementById("backup");
+    const clone = div.cloneNode(true);
+    const clone2 = div.cloneNode(true);
+
+    while (main.firstChild) main.firstChild.remove();
+    while (backup.firstChild) backup.firstChild.remove();
+
+    main.appendChild(clone);
+    backup.appendChild(clone2);
+    ;
+}
+
+function areaTransitionV(){
+    const main = document.getElementById(areaFrom);
+    const div = document.getElementById(areaTo);
     const clone = div.cloneNode(true);
 
     while (main.firstChild) main.firstChild.remove();
 
     main.appendChild(clone);
-    ;
 }
 
 function throneRoom() {
+    console.log(quests.princess)
+    if (quests.princess == 1) {
     areaFrom = "playarea";
     areaTo = "castle1";
+    }
+    else if (quests.princess == 2) {
+    areaFrom = "playarea";
+    areaTo = "castle2";
+    }
+    console.log(quests.princess)
     areaTransition();
 }
 
 function forestEntrance() {
     areaFrom = "playarea";
     areaTo = "forestEntrance";
-    areaTransition();
+    rEncounterForest();
+}
+
+function forest2() {
+    areaFrom = "playarea";
+    areaTo = "forest2";
+    rEncounterForest();
 }
 
 function gob() {
     areaFrom = "playarea";
     areaTo = "goblinFight";
-    areaR = document.getElementById(areaFrom);
+    //areaR = document.getElementById(areaFrom);
     goblin.health = 20;
     enemyName = goblin;
-    areaTransition();
+    areaTransitionV();
 }
 
 function wolfF() {
     areaFrom = "playarea";
     areaTo = "wolfFight";
-    areaR = "playarea";
+//  areaR = "playarea";
     wolf.health = 40;
     enemyName = wolf;
-    areaTransition();
+    areaTransitionV();
 }
 
 function rEncounterForest() {
@@ -214,7 +247,9 @@ function rEncounterForest() {
     else if (r >= .26 && r <= .5) {
         wolfF();
     }
-    else forestEntrance();
+    else { 
+        areaTransition();
+    }
 }
 
 function fight(){
@@ -242,7 +277,7 @@ function fight(){
          player.money = player.money + enemyName.money;
          document.getElementById("moneydisplay").innerHTML=player.money;
          document.getElementById("expdisplay").innerHTML=player.exp;
-         areaTransition();
+         areaTransitionV();
     }
 }
 
@@ -252,10 +287,17 @@ function playerDeath(){
     areaTransition();
 }
 
-function goBack(){
-    console.log(areaR);
+function princessQuest(){
     areaFrom = "playarea";
-    areaTo = "forestEntrance";
+    areaTo = "princessQuest";
+    quests.princess = 2;
+    areaTransitionV();
+}
+
+
+function goBack(){
+    areaFrom = "playarea";
+    areaTo = "backup";
     //areaTo = areaR;
     areaTransition();
 }
